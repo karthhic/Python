@@ -28,22 +28,9 @@ def TagData(mode,tag_name, plc_addr):                                           
             if value is None:
                 print("None returned while reading %s from PLC %s " % (tag_name, plc_addr))
             return poz
-
-def PushButton(btag,secs):                                   # Function to trigger a value and reset in a specific interval, like a push button.
-    TagData("wr",str(btag)+"=(BOOL)True", IP)
-    time.sleep(secs)
-    TagData("wr",str(btag)+"=(BOOL)False", IP)
-
 def read(tag):                                               # Function to read a tag value.
     tagout = TagData("rd",tag, IP)
     return tagout
-
-def wdint(btag,val):                                         # Function to write a DINT value to a tag.
-    TagData("wr",str(btag)+"=(DINT)" + str(val), IP)
-
-def wbool(btag,state):                                       # Function to write a BOOL value to a tag.
-    TagData("wr",str(btag)+"=(BOOL)" + str(state), IP)
-
 while True:
         for i in range(0,len(line)):
             print str(i+1)+". "+line[i]
